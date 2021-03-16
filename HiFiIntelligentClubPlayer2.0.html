@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-title" content="HiFiIntelligentClub">
+		<!--link rel="apple-touch-startup-image" href=""-->
+		<meta http-equiv="expires" content="Thu, 14 Apr 2020 18:00:00 GMT"/>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+		<meta name="milliseconds" content=".1119">
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="author" content="assminog@gmail.com">
+		<!--link rel="manifest" href="/manifest.json"/-->
+		<title>mySynth</title>
+		<script>
+				var objAudioContext;
+				var objAudioAnalyser;
+				var objSource;
+				var arrDecodedBuffer;
+				var bIsPlaying 		= false;
+				var strSound		= '/2.mp3';
+				var arrBuffer 		= {};
+				var arrNodes 		= {};
+				var mySource;
+				var mySpectrum;
+		//alert();
+	function init() 
+		{
+								console.log('init()');
+		var AudioContext = window.AudioContext || window.webkitAudioContext;
+		objAudioContext 				= new AudioContext();
+
+		objAudioAnalyser 				= objAudioContext.createAnalyser();
+		objAudioAnalyser.smoothingTimeConstant 		= 0.85;
+		objSource 					= objAudioContext.createBufferSource();
+
+								objAudioAnalyser.connect(objAudioContext.destination);
+								console.log(objAudioContext);
+		}
+	function getBuffer()
+		{
+		var request 		= new XMLHttpRequest();
+		alert('request');
+		request.responseType 	= 'arraybuffer';
+					request.addEventListener('load', bufferSound, false);
+
+					request.open('GET', strSound, true);
+					request.send();
+		}
+	function bufferSound(event) 
+		{
+		alert('bufferSound(event)');
+		console.log('bufferSound(event)');
+		var request	=event.target;
+				console.log('request');
+				console.log(request);
+				console.log('request.response');
+				console.log(request.response);
+		arrBuffer	=request.response;
+		var strDecoded	=objAudioContext.decodeAudioData(arrBuffer, playSound);
+				console.log(objAudioContext);
+				console.log('strDecoded');
+				console.log(strDecoded);
+		}
+	function playSound(event)
+		{
+		alert('playSound(event)');
+		console.log('playSound(event)');
+		console.log(event);
+		console.log(objSource);
+		objSource.buffer	= event;
+					objSource.connect(objAudioContext.destination);
+		console.log(objSource);
+						objSource.start(0);
+		}
+
+	</script>
+	<style>
+		input { display: block; }
+	</style>
+</head>
+
+	<body onload="init()">
+	<input id="play" onclick="getBuffer();" type="button" value="Play random sound" />
+	</body>
+</html>
