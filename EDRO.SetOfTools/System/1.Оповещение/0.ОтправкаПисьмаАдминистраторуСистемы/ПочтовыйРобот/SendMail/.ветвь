@@ -1,0 +1,15 @@
+ForTestImproveAndParticipate
+/
+EDRO.SetOfTools
+/
+System
+/
+1.Оповещение
+/
+0.ОтправкаПисьмаАдминистраторуСистемы
+/
+ПочтовыйРобот
+/
+SendMail
+/
+.ветвь
