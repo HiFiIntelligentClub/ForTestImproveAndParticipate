@@ -39,7 +39,7 @@ class EDRO_Buffering
 			'[E] EDRO.Event'					=>'/home/EDRO/1.Event/Event.php',
 			
 			
-			'EDRO_Objects.ObjectConstructor'			=>'/home/EDRO/EDRO.php',
+			// 'EDRO_Objects.ObjectConstructor'			=>'/home/EDRO/EDRO.php',
 			
 
 			//EDRO object constructor
